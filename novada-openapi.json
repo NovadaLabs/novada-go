@@ -1,0 +1,4746 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "默认模块",
+    "description": "OpenAPI specification generated from Novada Scraper API documentation.\n\nAll scraping operations are submitted as `POST` requests to the same endpoint `https://scraper.novada.com/request` using `application/x-www-form-urlencoded` bodies. Each distinct scraping operation is identified by its `scraper_id` value. Because every operation targets the same real path, operations are listed under pseudo-paths of the form `/request#<scraper_id>`; the real request path is always `/request` (see the `x-actual-path` field on each path).\n\nAuthentication uses a Bearer API key in the `Authorization` header.",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Proxy"
+    },
+    {
+      "name": "Proxy/User"
+    },
+    {
+      "name": "Proxy/Whitelisted"
+    },
+    {
+      "name": "Proxy/Residential Proxies"
+    },
+    {
+      "name": "Proxy/Mobile Proxies"
+    },
+    {
+      "name": "Proxy/Rotating ISP Proxies"
+    },
+    {
+      "name": "Proxy/Rotating Datacenter Proxies"
+    },
+    {
+      "name": "Proxy/Static ISP Proxies"
+    },
+    {
+      "name": "Proxy/Prohibit Domain"
+    },
+    {
+      "name": "Proxy/Unlimited Proxies"
+    },
+    {
+      "name": "Proxy/Dedicated Datacenter Proxies"
+    },
+    {
+      "name": "Scraper"
+    },
+    {
+      "name": "Scraper/Universal"
+    },
+    {
+      "name": "Scraper/Web Unblocker"
+    },
+    {
+      "name": "Scraper/Browser API"
+    },
+    {
+      "name": "Scraper/Scraper api"
+    },
+    {
+      "name": "Scraper/Scraper api/Amazon"
+    },
+    {
+      "name": "Scraper/Scraper api/Google"
+    },
+    {
+      "name": "Scraper/Scraper api/Instagram"
+    },
+    {
+      "name": "Scraper/Scraper api/LinkedIn"
+    },
+    {
+      "name": "Scraper/Scraper api/TikTok"
+    },
+    {
+      "name": "Scraper/Scraper api/Walmart"
+    },
+    {
+      "name": "Scraper/Scraper api/YouTube"
+    },
+    {
+      "name": "Other"
+    },
+    {
+      "name": "Other/Wallet"
+    },
+    {
+      "name": "Proxy User Management"
+    },
+    {
+      "name": "IP Whitelist Management"
+    },
+    {
+      "name": "Residential Proxies"
+    },
+    {
+      "name": "Browser Api"
+    },
+    {
+      "name": "Mobile proxy"
+    },
+    {
+      "name": "Rotating ISP Proxies"
+    },
+    {
+      "name": "Rotating Datacenter Proxies"
+    },
+    {
+      "name": "Static ISP Proxies"
+    },
+    {
+      "name": "Unlimited Proxies"
+    },
+    {
+      "name": "Dedicated Datacenter Proxies"
+    },
+    {
+      "name": "爬虫API"
+    },
+    {
+      "name": "网页解锁器"
+    },
+    {
+      "name": "浏览器Api"
+    },
+    {
+      "name": "Amazon"
+    },
+    {
+      "name": "Google"
+    },
+    {
+      "name": "Instagram"
+    },
+    {
+      "name": "LinkedIn"
+    },
+    {
+      "name": "TikTok"
+    },
+    {
+      "name": "Walmart"
+    },
+    {
+      "name": "YouTube"
+    },
+    {
+      "name": "Wallet"
+    }
+  ],
+  "paths": {
+    "/v1/proxy_account/create": {
+      "post": {
+        "summary": "Add  proxy user",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Scraper/Browser API",
+          "Proxy User Management"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product": {
+                    "type": "string",
+                    "description": "product:10=Browser API",
+                    "x-gitbook-description-html": "<p>product:1=Residential，2=Rotating ISP,3=Rotating Datacenter,4=Unlimited，7=Unblocker 9=mobile</p>",
+                    "example": "1"
+                  },
+                  "account": {
+                    "type": "string",
+                    "description": "Account Name",
+                    "x-gitbook-description-html": "<p>Account Name</p>",
+                    "example": "account11"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "Account Password",
+                    "x-gitbook-description-html": "<p>Account Password</p>",
+                    "example": "passworld11"
+                  },
+                  "status": {
+                    "type": "integer",
+                    "description": "Account Status: 1=normal, -3=personal disabled",
+                    "x-gitbook-description-html": "<p>Account Status: 1=normal, -3=personal disabled</p>",
+                    "example": "1"
+                  },
+                  "remark": {
+                    "type": "string",
+                    "description": "Remark",
+                    "x-gitbook-description-html": "<p>Remark</p>",
+                    "example": ""
+                  },
+                  "limit_flow": {
+                    "type": "string",
+                    "description": "Data Plans - Dynamic Residential Data Cap(G)",
+                    "x-gitbook-description-html": "<p>Data Plans - Dynamic Residential Data Cap(G)</p>",
+                    "example": ""
+                  }
+                },
+                "required": [
+                  "product",
+                  "account",
+                  "password",
+                  "status"
+                ]
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": null,
+                  "msg": "success",
+                  "timestamp": 1732186555
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/proxy_account/list": {
+      "post": {
+        "summary": "List proxy user ",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/User",
+          "Proxy User Management"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product": {
+                    "type": "integer",
+                    "description": "product:1=Residential，2=Rotating ISP,3=Rotating Datacenter,9=mobile,10=Browser API",
+                    "x-gitbook-description-html": "<p>product:1=Residential，2=Rotating ISP,3=Rotating Datacenter,4=Unlimited,7=Unblocker 9=mobile</p>",
+                    "example": "1"
+                  },
+                  "status": {
+                    "type": "integer",
+                    "description": "Status: 1=normal, -3=disabled",
+                    "x-gitbook-description-html": "<p>Status: 1=normal, -3=disabled</p>",
+                    "example": "1"
+                  },
+                  "account": {
+                    "type": "string",
+                    "description": "Account Name",
+                    "x-gitbook-description-html": "<p>Account Name</p>",
+                    "example": ""
+                  },
+                  "page": {
+                    "type": "integer",
+                    "description": "page number",
+                    "x-gitbook-description-html": "<p>page number</p>",
+                    "example": "1"
+                  },
+                  "limit": {
+                    "type": "integer",
+                    "description": "Number of entries returned per page",
+                    "x-gitbook-description-html": "<p>Number of entries returned per page</p>",
+                    "example": "10"
+                  }
+                },
+                "required": [
+                  "product",
+                  "page",
+                  "limit"
+                ]
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "list": [
+                      {
+                        "created_at": 1731311110,
+                        "updated_at": 1732066800,
+                        "id": 2,
+                        "uid": 81,
+                        "account": "account11",
+                        "password": "pass***",
+                        "status": 1,
+                        "residential_balance": 0,
+                        "residential_all_buy": 0,
+                        "residential_status": 1,
+                        "dc_balance": 0,
+                        "dc_all_buy": 0,
+                        "dc_status": -1,
+                        "isp_balance": 0,
+                        "isp_all_buy": 0,
+                        "isp_status": -1,
+                        "flow_type": "custom,static,isp,duration",
+                        "account_type": "limit",
+                        "check_white_list": 1,
+                        "remark": " ",
+                        "consumed_residential_flow": 90665,
+                        "limit_residential_flow": 1100000000,
+                        "consumed_dc_flow": 1997,
+                        "limit_dc_flow": 0,
+                        "consumed_isp_flow": 2543,
+                        "limit_isp_flow": 0
+                      }
+                    ],
+                    "page": 1,
+                    "total": 2
+                  },
+                  "msg": "success",
+                  "timestamp": 1732066889
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/proxy_account/update": {
+      "post": {
+        "summary": "Update proxy user",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/User",
+          "Proxy User Management"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": "ID：your account id",
+                    "x-gitbook-description-html": "<p>ID：your account id</p>",
+                    "example": "2"
+                  },
+                  "account": {
+                    "type": "string",
+                    "description": "Account Name",
+                    "x-gitbook-description-html": "<p>Account Name</p>",
+                    "example": "account11"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "Account Password",
+                    "x-gitbook-description-html": "<p>Account Password</p>",
+                    "example": "passworld11"
+                  },
+                  "status": {
+                    "type": "integer",
+                    "description": "Account Status: 1=normal, -3=disabled",
+                    "x-gitbook-description-html": "<p>Account Status: 1=normal, -3=disabled</p>",
+                    "example": "1"
+                  },
+                  "remark": {
+                    "type": "string",
+                    "description": "Remark",
+                    "x-gitbook-description-html": "<p>Remark</p>",
+                    "example": ""
+                  },
+                  "limit_flow": {
+                    "type": "string",
+                    "description": "Data Plans - Dynamic Residential Data Cap(G)",
+                    "x-gitbook-description-html": "<p>Data Plans - Dynamic Residential Data Cap(G)</p>",
+                    "example": ""
+                  }
+                },
+                "required": [
+                  "id",
+                  "account",
+                  "password"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {
+                  "code": 0,
+                  "data": null,
+                  "msg": "success",
+                  "timestamp": 1732186555
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/proxy_account/consume_log": {
+      "post": {
+        "summary": "List proxy user traffic consumption",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/User",
+          "Proxy User Management"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "account_id": {
+                    "type": "integer",
+                    "description": "Account ID",
+                    "x-gitbook-description-html": "<p>Account ID</p>",
+                    "example": "2"
+                  },
+                  "start_time": {
+                    "type": "string",
+                    "description": "Start Time (datetime)",
+                    "x-gitbook-description-html": "<p>Start Time (datetime)</p>",
+                    "example": "2006-01-02 15:04:05"
+                  },
+                  "end_time": {
+                    "type": "string",
+                    "description": "End Time (datetime)",
+                    "x-gitbook-description-html": "<p>End Time (datetime)</p>",
+                    "example": "2006-01-02 15:04:05"
+                  },
+                  "limit": {
+                    "type": "integer",
+                    "description": "Number of entries returned per page",
+                    "x-gitbook-description-html": "<p>Number of entries returned per page</p>",
+                    "example": "10"
+                  },
+                  "page": {
+                    "type": "integer",
+                    "description": "page number",
+                    "x-gitbook-description-html": "<p>page number</p>",
+                    "example": "1"
+                  }
+                },
+                "required": [
+                  "account_id",
+                  "limit",
+                  "page"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "list": [
+                      {
+                        "id": 0,
+                        "account_id": 0,
+                        "uid": 0,
+                        "residential_balance": 0,
+                        "residential_all_buy": 0,
+                        "consumed_residential_flow": 0,
+                        "dc_balance": 0,
+                        "dc_all_buy": 0,
+                        "consumed_dc_flow": 0,
+                        "isp_balance": 0,
+                        "isp_all_buy": 0,
+                        "consumed_isp_flow": 0,
+                        "day": 1731340800
+                      }
+                    ]
+                  },
+                  "msg": "success",
+                  "timestamp": 1732083917
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/white_list/add": {
+      "post": {
+        "summary": "Add whitelist ip",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Whitelisted",
+          "IP Whitelist Management"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product": {
+                    "type": "integer",
+                    "description": "Product:1=Residential,5=Static isp\n4=Unlimited proxies",
+                    "x-gitbook-description-html": "<p>Product:1=Residential,5=Static isp\n4=Unlimited proxies</p>",
+                    "example": "1"
+                  },
+                  "ip": {
+                    "type": "string",
+                    "description": "IP",
+                    "x-gitbook-description-html": "<p>IP</p>",
+                    "example": "10.10.10.1"
+                  },
+                  "remark": {
+                    "type": "string",
+                    "description": "Remark",
+                    "x-gitbook-description-html": "<p>Remark</p>",
+                    "example": "test"
+                  }
+                },
+                "required": [
+                  "product",
+                  "ip"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": null,
+                  "msg": "success",
+                  "timestamp": 1732084554
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/white_list/list": {
+      "post": {
+        "summary": "List whitelist ip",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Whitelisted",
+          "IP Whitelist Management"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product": {
+                    "type": "integer",
+                    "description": "Product:1=Residential,5=Static product",
+                    "x-gitbook-description-html": "<p>Product:1=Residential,5=Static product</p>",
+                    "example": "1"
+                  },
+                  "ip": {
+                    "type": "string",
+                    "description": "Ip",
+                    "x-gitbook-description-html": "<p>Ip</p>",
+                    "example": "10.10.10.1"
+                  },
+                  "start_time": {
+                    "type": "string",
+                    "description": "Start Time (datetime)",
+                    "x-gitbook-description-html": "<p>Start Time (datetime)</p>",
+                    "example": "2006-01-02 15:04:05"
+                  },
+                  "end_time": {
+                    "type": "string",
+                    "description": "End Time (datetime)",
+                    "x-gitbook-description-html": "<p>End Time (datetime)</p>",
+                    "example": "2006-01-02 15:04:05"
+                  },
+                  "lock": {
+                    "type": "integer",
+                    "description": "Locked: 0 Unlocked 1 Locked",
+                    "x-gitbook-description-html": "<p>Locked: 0 Unlocked 1 Locked</p>",
+                    "example": ""
+                  }
+                },
+                "required": [
+                  "product"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "list": [
+                      {
+                        "created_at": 1732084553,
+                        "updated_at": 1732084554,
+                        "id": 12,
+                        "uid": 81,
+                        "mark_ip": "10.10.10.1",
+                        "ip": 168430081,
+                        "status": 1,
+                        "lock": false,
+                        "lock_uid": 0,
+                        "flag": 0,
+                        "is_biger": 0,
+                        "is_limit": 0,
+                        "mark": "test"
+                      }
+                    ],
+                    "total": 1
+                  },
+                  "msg": "success",
+                  "timestamp": 1732084616
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/white_list/del": {
+      "post": {
+        "summary": "Delete whitelist ip",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Whitelisted",
+          "IP Whitelist Management"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product": {
+                    "type": "string",
+                    "description": "Product:1=Residential,5=Static product",
+                    "x-gitbook-description-html": "<p>Product:1=Residential,5=Static product</p>",
+                    "example": "1"
+                  },
+                  "ips": {
+                    "type": "string",
+                    "description": "ips:multiple use ',' separated",
+                    "x-gitbook-description-html": "<p>ips:multiple use ',' separated</p>",
+                    "example": "10.10.10.1"
+                  }
+                },
+                "required": [
+                  "product",
+                  "ips"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": null,
+                  "msg": "success",
+                  "timestamp": 1732084749
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/white_list/remark": {
+      "post": {
+        "summary": "Remark whitelist ip",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Whitelisted",
+          "IP Whitelist Management"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product": {
+                    "type": "integer",
+                    "description": "Product:1=Residential,5=Static product",
+                    "x-gitbook-description-html": "<p>Product:1=Residential,5=Static product</p>",
+                    "example": "1"
+                  },
+                  "id": {
+                    "type": "string",
+                    "description": "Id of ip",
+                    "x-gitbook-description-html": "<p>Id of ip</p>",
+                    "example": "101"
+                  },
+                  "remark": {
+                    "type": "string",
+                    "description": "Remark",
+                    "x-gitbook-description-html": "<p>Remark</p>",
+                    "example": "some mark"
+                  }
+                },
+                "required": [
+                  "product",
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {
+                  "code": 0,
+                  "data": null,
+                  "msg": "success",
+                  "timestamp": 1732084554
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/proxy/domestic_dynamic_area": {
+      "post": {
+        "summary": "List residential proxy countries",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Residential Proxies",
+          "Residential Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "search_word": {
+                    "type": "string",
+                    "description": "Country Name",
+                    "x-gitbook-description-html": "<p>Country Name</p>",
+                    "example": ""
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "continent": {
+                      "1": "Asia",
+                      "2": "Europe",
+                      "3": "North America",
+                      "4": "South America",
+                      "5": "Oceania",
+                      "6": "Africa",
+                      "7": "Antarctica"
+                    },
+                    "country": [
+                      {
+                        "continent": "Asia",
+                        "continent_code": 1,
+                        "list": [
+                          {
+                            "code": "kr",
+                            "continent": 1,
+                            "ip_num": 0,
+                            "name": "Korea",
+                            "name_en": "Korea",
+                            "protocol": 1
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "msg": "success",
+                  "timestamp": 1732261110
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/proxy/city_by_code": {
+      "post": {
+        "summary": "List residential proxy states",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Residential Proxies",
+          "Residential Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "description": "Country Code",
+                    "x-gitbook-description-html": "<p>Country Code</p>",
+                    "example": "us"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "data": [
+                      {
+                        "state": "newyorkcity"
+                      }
+                    ]
+                  },
+                  "msg": "success",
+                  "timestamp": 1732188118
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/proxy/region_by_city": {
+      "post": {
+        "summary": "List residential proxy cities",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Residential Proxies",
+          "Residential Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "description": "Country Code",
+                    "x-gitbook-description-html": "<p>Country Code</p>",
+                    "example": "us"
+                  },
+                  "region": {
+                    "type": "string",
+                    "description": "Continent Name",
+                    "x-gitbook-description-html": "<p>Continent Name</p>",
+                    "example": "alabama"
+                  }
+                },
+                "required": [
+                  "code",
+                  "region"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "data": [
+                      {
+                        "code": "guntersville"
+                      }
+                    ]
+                  },
+                  "msg": "success",
+                  "timestamp": 1732188644
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/proxy/city_isp": {
+      "post": {
+        "summary": "List residential proxy isp",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Residential Proxies",
+          "Residential Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "description": "Country Code",
+                    "x-gitbook-description-html": "<p>Country Code</p>",
+                    "example": "us"
+                  }
+                },
+                "required": [
+                  "code"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "list": [
+                      {
+                        "asn": "AS327712",
+                        "show_name": "Telecom Algeria"
+                      }
+                    ]
+                  },
+                  "msg": "success",
+                  "timestamp": 1732188842
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/residential_flow/consume_log": {
+      "post": {
+        "summary": "List main account traffic consumption",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Residential Proxies",
+          "Residential Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "start_time": {
+                    "type": "string",
+                    "description": "Start time",
+                    "x-gitbook-description-html": "<p>Start time</p>",
+                    "example": "2006-01-02 15:04:05"
+                  },
+                  "end_time": {
+                    "type": "string",
+                    "description": "End time",
+                    "x-gitbook-description-html": "<p>End time</p>",
+                    "example": "2006-01-02 15:04:05"
+                  }
+                },
+                "required": [
+                  "start_time",
+                  "end_time"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "list": [
+                      {
+                        "id": 1,
+                        "uid": 81,
+                        "balance": 30999907705,
+                        "all_buy": 31000000000,
+                        "use": 92295,
+                        "day": 1731427200,
+                        "expire_flow": 0
+                      }
+                    ]
+                  },
+                  "msg": "success",
+                  "timestamp": 1732105258
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/residential_flow/balance": {
+      "post": {
+        "summary": "Show remaining traffic",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Residential Proxies",
+          "Browser Api",
+          "Residential Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>成功</p>",
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "balance": {
+                          "type": "integer",
+                          "description": "Remining traffic(Byte)"
+                        },
+                        "expire_time": {
+                          "type": "integer",
+                          "description": "Expiretime"
+                        }
+                      },
+                      "required": [
+                        "balance",
+                        "expire_time"
+                      ]
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data",
+                    "msg",
+                    "timestamp"
+                  ]
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "balance": 124000000111,
+                    "expire_time": 1769135681
+                  },
+                  "msg": "success",
+                  "timestamp": 1769135681
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>失败</p>",
+            "description": "失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/proxy/mobile_area": {
+      "post": {
+        "summary": "List mobile proxy countries",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Mobile Proxies",
+          "Mobile proxy"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "continent": {
+                      "1": "Asia",
+                      "2": "Europe",
+                      "3": "North America",
+                      "4": "South America",
+                      "5": "Oceania",
+                      "6": "Africa",
+                      "7": "Antarctica"
+                    },
+                    "country": [
+                      {
+                        "continent": "Asia",
+                        "continent_code": 1,
+                        "list": [
+                          {
+                            "code": "kr",
+                            "continent": 1,
+                            "ip_num": 0,
+                            "name": "Korea",
+                            "name_en": "Korea",
+                            "protocol": 1
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "msg": "success",
+                  "timestamp": 1732261110
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/mobile_flow/mobile_flow_balance": {
+      "post": {
+        "summary": "Show mobile proxy remaining traffic",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Mobile Proxies",
+          "Mobile proxy"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>成功</p>",
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "balance": 30999899170
+                  },
+                  "msg": "success",
+                  "timestamp": 1732105216
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>失败</p>",
+            "description": "失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/mobile_flow/mobile_flow_use": {
+      "post": {
+        "summary": "List mobile proxy main account traffic consumption",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Mobile Proxies",
+          "Mobile proxy"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "start_time": {
+                    "type": "string",
+                    "description": "Start time",
+                    "x-gitbook-description-html": "<p>Start time</p>",
+                    "example": "2006-01-02 15:04:05"
+                  },
+                  "end_time": {
+                    "type": "string",
+                    "description": "End time",
+                    "x-gitbook-description-html": "<p>End time</p>",
+                    "example": "2006-01-02 15:04:05"
+                  },
+                  "day_or_hour": {
+                    "type": "string",
+                    "description": "1-hour 2-day",
+                    "x-gitbook-description-html": "<p>1-hour 2-day</p>",
+                    "example": "1"
+                  }
+                },
+                "required": [
+                  "start_time",
+                  "end_time",
+                  "day_or_hour"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "list": [
+                      {
+                        "id": 1,
+                        "uid": 81,
+                        "balance": 30999907705,
+                        "all_buy": 31000000000,
+                        "use": 92295,
+                        "day": 1731427200,
+                        "expire_flow": 0
+                      }
+                    ]
+                  },
+                  "msg": "success",
+                  "timestamp": 1732105258
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/proxy/isp_data_area": {
+      "post": {
+        "summary": "List rotating ISP countries",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Rotating ISP Proxies",
+          "Rotating ISP Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "country": [
+                      {
+                        "code": "kw",
+                        "node": "Kuwait"
+                      }
+                    ]
+                  },
+                  "msg": "success",
+                  "timestamp": 1732324657
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/isp_flow/balance": {
+      "post": {
+        "summary": "Show remaining traffic",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Rotating ISP Proxies",
+          "Rotating ISP Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "balance": {
+                          "type": "integer",
+                          "description": "Remining traffic(Byte)"
+                        },
+                        "expire_time": {
+                          "type": "integer",
+                          "description": "Expiretime"
+                        }
+                      },
+                      "required": [
+                        "balance",
+                        "expire_time"
+                      ]
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data",
+                    "msg",
+                    "timestamp"
+                  ]
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "balance": 124000000111,
+                    "expire_time": 1769135681
+                  },
+                  "msg": "success",
+                  "timestamp": 1769135681
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/isp_flow/consume_log": {
+      "post": {
+        "summary": "List main account traffic consumption",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Rotating ISP Proxies",
+          "Rotating ISP Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "start_time": {
+                    "type": "string",
+                    "description": "Start time",
+                    "x-gitbook-description-html": "<p>Start time</p>",
+                    "example": "2006-01-02 15:04:05"
+                  },
+                  "end_time": {
+                    "type": "string",
+                    "description": "End time",
+                    "x-gitbook-description-html": "<p>End time</p>",
+                    "example": "2006-01-02 15:04:05"
+                  }
+                },
+                "required": [
+                  "start_time",
+                  "end_time"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "list": [
+                      {
+                        "id": 1,
+                        "uid": 81,
+                        "balance": 30999907705,
+                        "all_buy": 31000000000,
+                        "use": 92295,
+                        "day": 1731427200,
+                        "expire_flow": 0
+                      }
+                    ]
+                  },
+                  "msg": "success",
+                  "timestamp": 1732105258
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/proxy/dynamic_data_area": {
+      "post": {
+        "summary": "List rotating datacenter countries",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Rotating Datacenter Proxies",
+          "Rotating Datacenter Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "search_word": {
+                    "type": "string",
+                    "description": "Country Name",
+                    "x-gitbook-description-html": "<p>Country Name</p>",
+                    "example": ""
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "country": [
+                      {
+                        "id": 1,
+                        "code": "us",
+                        "status": 1,
+                        "continents": 3,
+                        "area_code": 1,
+                        "name_en": "U.S.A",
+                        "available": 1,
+                        "city": {
+                          "code": "random"
+                        }
+                      }
+                    ]
+                  },
+                  "msg": "success",
+                  "timestamp": 1732085191
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/dc_flow/consume_log": {
+      "post": {
+        "summary": "List main account traffic consumption",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Rotating Datacenter Proxies",
+          "Rotating Datacenter Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "start_time": {
+                    "type": "string",
+                    "description": "Start time",
+                    "x-gitbook-description-html": "<p>Start time</p>",
+                    "example": "2006-01-02 15:04:05"
+                  },
+                  "end_time": {
+                    "type": "string",
+                    "description": "End time",
+                    "x-gitbook-description-html": "<p>End time</p>",
+                    "example": "2006-01-02 15:04:05"
+                  }
+                },
+                "required": [
+                  "start_time",
+                  "end_time"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "list": [
+                      {
+                        "id": 1,
+                        "uid": 81,
+                        "balance": 30999907705,
+                        "all_buy": 31000000000,
+                        "use": 92295,
+                        "day": 1731427200,
+                        "expire_flow": 0
+                      }
+                    ]
+                  },
+                  "msg": "success",
+                  "timestamp": 1732105258
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/dc_flow/balance": {
+      "post": {
+        "summary": "Show remaining traffic",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Rotating Datacenter Proxies",
+          "Rotating Datacenter Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "balance": {
+                          "type": "integer",
+                          "description": "Remining traffic(Byte)"
+                        },
+                        "expire_time": {
+                          "type": "integer",
+                          "description": "Expiretime"
+                        }
+                      },
+                      "required": [
+                        "balance",
+                        "expire_time"
+                      ]
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data",
+                    "msg",
+                    "timestamp"
+                  ]
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "balance": 124000000111,
+                    "expire_time": 1769135681
+                  },
+                  "msg": "success",
+                  "timestamp": 1769135681
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/static_house/open": {
+      "post": {
+        "summary": "Open ips of static isp",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Static ISP Proxies",
+          "Static ISP Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ip_type": {
+                    "type": "string",
+                    "description": "ip type: normal=Standard ISP IP,premium=Premium ISP IP",
+                    "x-gitbook-description-html": "<p>ip type: normal=Standard ISP IP,premium=Premium ISP IP</p>",
+                    "example": "normal"
+                  },
+                  "region": {
+                    "type": "string",
+                    "description": "area:num",
+                    "x-gitbook-description-html": "<p>area:num</p>",
+                    "example": "hk:1|us-va:2"
+                  },
+                  "duration": {
+                    "type": "string",
+                    "description": "IP activation time:week|month",
+                    "x-gitbook-description-html": "<p>IP activation time:week|month</p>",
+                    "example": "week"
+                  },
+                  "num": {
+                    "type": "integer",
+                    "description": "Number of ips opened",
+                    "x-gitbook-description-html": "<p>Number of ips opened</p>",
+                    "example": "3"
+                  }
+                },
+                "required": [
+                  "ip_type",
+                  "region",
+                  "duration",
+                  "num"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": null,
+                  "msg": "success",
+                  "timestamp": 1732106923
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/static_house/list": {
+      "post": {
+        "summary": "List ips of static isp",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Static ISP Proxies",
+          "Static ISP Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "description": "Status: \"\"=ALL, 1=In use, 2=Expired,3=Released",
+                    "x-gitbook-description-html": "<p>Status: \"\"=ALL, 1=In use, 2=Expired,3=Released</p>",
+                    "example": ""
+                  },
+                  "region": {
+                    "type": "string",
+                    "description": "Area Code",
+                    "x-gitbook-description-html": "<p>Area Code</p>",
+                    "example": ""
+                  },
+                  "key_word": {
+                    "type": "string",
+                    "description": "Keywords (remarks, order number, ip)",
+                    "x-gitbook-description-html": "<p>Keywords (remarks, order number, ip)</p>",
+                    "example": ""
+                  },
+                  "is_auto_renew": {
+                    "type": "integer",
+                    "description": "Whether to automatically renew 1 Yes - 1 No (When the input parameter is -1, the return parameter \"auto_renew\" is 0, indicating non-automatic renewal)",
+                    "x-gitbook-description-html": "<p>Whether to automatically renew 1 Yes - 1 No (When the input parameter is -1, the return parameter \"auto_renew\" is 0, indicating non-automatic renewal)</p>",
+                    "example": ""
+                  },
+                  "page": {
+                    "type": "integer",
+                    "description": "page number",
+                    "x-gitbook-description-html": "<p>page number</p>",
+                    "example": "1"
+                  },
+                  "limit": {
+                    "type": "integer",
+                    "description": "Number of entries per page",
+                    "x-gitbook-description-html": "<p>Number of entries per page</p>",
+                    "example": "10"
+                  }
+                },
+                "required": [
+                  "page",
+                  "limit"
+                ]
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "list": [
+                      {
+                        "id": 51,
+                        "ip": "156.249.22.144",
+                        "port": "2000/7777/2340",
+                        "duration": 1209519,
+                        "region": "us-va",
+                        "expire_time": 1732677539,
+                        "create_time": 1731468020,
+                        "country": "美国-弗吉尼亚",
+                        "country_en": "",
+                        "status": 2,
+                        "remark": "",
+                        "auto_renew": 0,
+                        "type": 0,
+                        "diff_day": 7,
+                        "account": "aZnhjusX1HDLnuqmR",
+                        "password": "povF1az"
+                      }
+                    ],
+                    "page": 1,
+                    "total": 13
+                  },
+                  "msg": "success",
+                  "timestamp": 1732106465
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/static_house/export": {
+      "post": {
+        "summary": "Export ips of static isp",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Static ISP Proxies",
+          "Static ISP Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "integer",
+                    "description": "Status: \"\"=ALL, 1=In use, 2=Expired,3=Released",
+                    "x-gitbook-description-html": "<p>Status: \"\"=ALL, 1=In use, 2=Expired,3=Released</p>",
+                    "example": ""
+                  },
+                  "region": {
+                    "type": "string",
+                    "description": "Area Code",
+                    "x-gitbook-description-html": "<p>Area Code</p>",
+                    "example": ""
+                  },
+                  "key_word": {
+                    "type": "string",
+                    "description": "Keywords (remarks, order number, ip)",
+                    "x-gitbook-description-html": "<p>Keywords (remarks, order number, ip)</p>",
+                    "example": ""
+                  },
+                  "is_auto_renew": {
+                    "type": "integer",
+                    "description": "Whether to automatically renew 1 Yes - 1 No",
+                    "x-gitbook-description-html": "<p>Whether to automatically renew 1 Yes - 1 No</p>",
+                    "example": ""
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": "Output file stream"
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/static_house/region": {
+      "post": {
+        "summary": "List regions of static isp",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Static ISP Proxies",
+          "Static ISP Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "isp_type": {
+                    "type": "string",
+                    "description": "isp type：isp-resi=Static Residential IP ,isp-resi-hq=Premium Residential IP",
+                    "x-gitbook-description-html": "<p>isp type：isp-resi=Static Residential IP ,isp-resi-hq=Premium Residential IP</p>",
+                    "example": "isp-resi-hq"
+                  }
+                },
+                "required": [
+                  "isp_type"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "list": {
+                      "Asia-Pacific": [
+                        {
+                          "node": "Vietnam - Ho Chi Minh City",
+                          "node_en": "Vietnam - Ho Chi Minh City",
+                          "param": 0,
+                          "region": "vn-sgn"
+                        }
+                      ],
+                      "Europe and America": [
+                        {
+                          "node": "Sao Paulo",
+                          "node_en": "Sao Paulo",
+                          "param": 0,
+                          "region": "\t\r\nbr-sp"
+                        }
+                      ],
+                      "South Asia": null,
+                      "the Middle East": [
+                        {
+                          "node": "Dubai",
+                          "node_en": "Dubai",
+                          "param": 0,
+                          "region": "uae-dubai"
+                        }
+                      ],
+                      "Africa": null,
+                      "Oceania": null
+                    }
+                  },
+                  "msg": "success",
+                  "timestamp": 1732324705
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/static_house/renew": {
+      "post": {
+        "summary": "Renew ips of static isp",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Static ISP Proxies",
+          "Static ISP Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "renew_ip_list": {
+                    "type": "string",
+                    "description": "Renew IP, multiple use ',' separated",
+                    "x-gitbook-description-html": "<p>Renew IP, multiple use ',' separated</p>",
+                    "example": "127.0.0.1,127.0.0.2"
+                  },
+                  "duration": {
+                    "type": "string",
+                    "description": "IP activation time:week|month",
+                    "x-gitbook-description-html": "<p>IP activation time:week|month</p>",
+                    "example": "week"
+                  }
+                },
+                "required": [
+                  "renew_ip_list",
+                  "duration"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": null,
+                  "msg": "success",
+                  "timestamp": 1732186555
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/static_house/renew_setting": {
+      "post": {
+        "summary": "Update renewal setting",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Static ISP Proxies",
+          "Static ISP Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "Product type:static_house",
+                    "x-gitbook-description-html": "<p>Product type:static_house</p>",
+                    "example": "static_house"
+                  },
+                  "ids": {
+                    "type": "string",
+                    "description": "Ip's id:multiple use ',' separated",
+                    "x-gitbook-description-html": "<p>Ip's id:multiple use ',' separated</p>",
+                    "example": "100,111,112"
+                  },
+                  "package_type": {
+                    "type": "string",
+                    "description": "IP activation time:week|month",
+                    "x-gitbook-description-html": "<p>IP activation time:week|month</p>",
+                    "example": "week"
+                  },
+                  "status": {
+                    "type": "integer",
+                    "description": "Status: -1=disabled, 1=normal",
+                    "x-gitbook-description-html": "<p>Status: -1=disabled, 1=normal</p>",
+                    "example": "1"
+                  },
+                  "renew_type": {
+                    "type": "integer",
+                    "description": "Renewal method: 1 wallet, 2 credit cards",
+                    "example": 1
+                  }
+                },
+                "required": [
+                  "type",
+                  "ids",
+                  "package_type",
+                  "status",
+                  "renew_type"
+                ]
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": null,
+                  "msg": "success",
+                  "timestamp": 1732186555
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/prohibit_domain/add": {
+      "post": {
+        "summary": "Add blocked domain",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Prohibit Domain",
+          "Other"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string",
+                    "description": "Allow access to the address",
+                    "x-gitbook-description-html": "<p>Allow access to the address</p>",
+                    "example": "www.baidu.com"
+                  }
+                },
+                "required": [
+                  "address"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": null,
+                  "msg": "success",
+                  "timestamp": 1732107639
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/prohibit_domain/list": {
+      "post": {
+        "summary": "List blocked domain",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Prohibit Domain",
+          "Other"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "list": [
+                      {
+                        "created_at": 1731313597,
+                        "updated_at": 1731313597,
+                        "id": 231,
+                        "uid": 81,
+                        "status": 1,
+                        "address": "google.com"
+                      }
+                    ],
+                    "total": 1
+                  },
+                  "msg": "success",
+                  "timestamp": 1732107516
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/prohibit_domain/del": {
+      "post": {
+        "summary": "Delete blocked domain",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Prohibit Domain",
+          "Other"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "ID",
+                    "x-gitbook-description-html": "<p>ID</p>",
+                    "example": ""
+                  },
+                  "is_all": {
+                    "type": "string",
+                    "description": "All: 1 Yes 2 No",
+                    "x-gitbook-description-html": "<p>All: 1 Yes 2 No</p>",
+                    "example": ""
+                  }
+                },
+                "required": [
+                  "id",
+                  "is_all"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": null,
+                  "msg": "success",
+                  "timestamp": 1732107639
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/unlimited/host_list": {
+      "post": {
+        "summary": "GET list of servers",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Unlimited Proxies",
+          "Unlimited Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "page": {
+                    "type": "string",
+                    "example": "1"
+                  },
+                  "limit": {
+                    "type": "string",
+                    "example": "10"
+                  }
+                },
+                "required": [
+                  "page",
+                  "limit"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>成功</p>",
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "list": [
+                      {
+                        "id": 277,
+                        "create_time": 1748092464,
+                        "expire_time": 1749697264,
+                        "state": 1,
+                        "host": "yyds.com",
+                        "user_rate_limit_bytes": 300,
+                        "order_id": "2506051058302691",
+                        "days": 6,
+                        "duration": 7,
+                        "band_width": 0,
+                        "hardware": "16_32"
+                      },
+                      {
+                        "id": 276,
+                        "create_time": 1749092323,
+                        "expire_time": 1749697123,
+                        "state": 1,
+                        "host": "yyds.com",
+                        "user_rate_limit_bytes": 300,
+                        "order_id": "2506051058302691",
+                        "days": 6,
+                        "duration": 7,
+                        "band_width": 0,
+                        "hardware": "16_32"
+                      },
+                      {
+                        "id": 275,
+                        "create_time": 1749091690,
+                        "expire_time": 1749178090,
+                        "state": 1,
+                        "host": "yyds.com",
+                        "user_rate_limit_bytes": 200,
+                        "order_id": "2506051007598698",
+                        "days": 0,
+                        "duration": 1,
+                        "band_width": 0,
+                        "hardware": "8_16"
+                      },
+                      {
+                        "id": 274,
+                        "create_time": 1749091540,
+                        "expire_time": 1749177940,
+                        "state": 1,
+                        "host": "yyds.com",
+                        "user_rate_limit_bytes": 200,
+                        "order_id": "2506051007598698",
+                        "days": 0,
+                        "duration": 1,
+                        "band_width": 0,
+                        "hardware": "8_16"
+                      },
+                      {
+                        "id": 273,
+                        "create_time": 1749091503,
+                        "expire_time": 1749177903,
+                        "state": 1,
+                        "host": "yyds.com",
+                        "user_rate_limit_bytes": 200,
+                        "order_id": "2506051007598698",
+                        "days": 0,
+                        "duration": 1,
+                        "band_width": 0,
+                        "hardware": "8_16"
+                      },
+                      {
+                        "id": 272,
+                        "create_time": 1749091357,
+                        "expire_time": 1749177757,
+                        "state": 1,
+                        "host": "yyds.com",
+                        "user_rate_limit_bytes": 200,
+                        "order_id": "2506051007598698",
+                        "days": 0,
+                        "duration": 1,
+                        "band_width": 0,
+                        "hardware": "8_16"
+                      },
+                      {
+                        "id": 271,
+                        "create_time": 1749091315,
+                        "expire_time": 1749177715,
+                        "state": 1,
+                        "host": "yyds.com",
+                        "user_rate_limit_bytes": 200,
+                        "order_id": "2506051007598698",
+                        "days": 0,
+                        "duration": 1,
+                        "band_width": 0,
+                        "hardware": "8_16"
+                      },
+                      {
+                        "id": 270,
+                        "create_time": 1749091012,
+                        "expire_time": 1749177412,
+                        "state": 1,
+                        "host": "yyds.com",
+                        "user_rate_limit_bytes": 200,
+                        "order_id": "2506051007598698",
+                        "days": 0,
+                        "duration": 1,
+                        "band_width": 0,
+                        "hardware": "8_16"
+                      },
+                      {
+                        "id": 269,
+                        "create_time": 1749088419,
+                        "expire_time": 1749175809,
+                        "state": 1,
+                        "host": "yyds.com",
+                        "user_rate_limit_bytes": 200,
+                        "order_id": "2506051007598698",
+                        "days": 0,
+                        "duration": 1,
+                        "band_width": 0,
+                        "hardware": "8_16"
+                      }
+                    ],
+                    "total": 9
+                  },
+                  "msg": "success",
+                  "timestamp": 1749112877
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>失败</p>",
+            "description": "失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/static/open": {
+      "post": {
+        "summary": "Open ips of dedicated datacenter",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Dedicated Datacenter Proxies",
+          "Dedicated Datacenter Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "region": {
+                    "type": "string",
+                    "description": "area:num",
+                    "x-gitbook-description-html": "<p>area:num</p>",
+                    "example": "hk:1|tw:2"
+                  },
+                  "duration": {
+                    "type": "string",
+                    "description": "IP activation time:week|month",
+                    "x-gitbook-description-html": "<p>IP activation time:week|month</p>",
+                    "example": "week"
+                  },
+                  "num": {
+                    "type": "integer",
+                    "description": "Number of ips opened",
+                    "x-gitbook-description-html": "<p>Number of ips opened</p>",
+                    "example": "3"
+                  }
+                },
+                "required": [
+                  "region",
+                  "duration",
+                  "num"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": null,
+                  "msg": "success",
+                  "timestamp": 1732106923
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/static/list": {
+      "post": {
+        "summary": "List ips of dedicated datacenter",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Dedicated Datacenter Proxies",
+          "Dedicated Datacenter Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "integer",
+                    "description": "Status: \"\"=ALL, 1=In use, 2=Expired,3=Released",
+                    "x-gitbook-description-html": "<p>Status: \"\"=ALL, 1=In use, 2=Expired,3=Released</p>",
+                    "example": ""
+                  },
+                  "region": {
+                    "type": "string",
+                    "description": "Area Code",
+                    "x-gitbook-description-html": "<p>Area Code</p>",
+                    "example": ""
+                  },
+                  "key_word": {
+                    "type": "string",
+                    "description": "Keywords (remarks, order number, ip)",
+                    "x-gitbook-description-html": "<p>Keywords (remarks, order number, ip)</p>",
+                    "example": ""
+                  },
+                  "is_auto_renew": {
+                    "type": "integer",
+                    "description": "Whether to automatically renew 1 Yes - 1 No",
+                    "x-gitbook-description-html": "<p>Whether to automatically renew 1 Yes - 1 No</p>",
+                    "example": ""
+                  },
+                  "page": {
+                    "type": "integer",
+                    "description": "page number",
+                    "x-gitbook-description-html": "<p>page number</p>",
+                    "example": "1"
+                  },
+                  "limit": {
+                    "type": "integer",
+                    "description": "Number of entries per page",
+                    "x-gitbook-description-html": "<p>Number of entries per page</p>",
+                    "example": "10"
+                  }
+                },
+                "required": [
+                  "page",
+                  "limit"
+                ]
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "list": [
+                      {
+                        "id": 51,
+                        "ip": "156.249.22.144",
+                        "port": "2000/7777/2340",
+                        "duration": 1209519,
+                        "region": "us-va",
+                        "expire_time": 1732677539,
+                        "create_time": 1731468020,
+                        "country": "美国-弗吉尼亚",
+                        "country_en": "",
+                        "status": 2,
+                        "remark": "",
+                        "type": 0,
+                        "diff_day": 7,
+                        "account": "aZnhjusX1HDLnuqmR",
+                        "password": "povF1az"
+                      }
+                    ],
+                    "page": 1,
+                    "total": 13
+                  },
+                  "msg": "success",
+                  "timestamp": 1732106465
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/static/export": {
+      "post": {
+        "summary": "Export ips of dedicated datacenter",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Dedicated Datacenter Proxies",
+          "Dedicated Datacenter Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "integer",
+                    "description": "Status: \"\"=ALL, 1=In use, 2=Expired,3=Released",
+                    "x-gitbook-description-html": "<p>Status: \"\"=ALL, 1=In use, 2=Expired,3=Released</p>",
+                    "example": ""
+                  },
+                  "region": {
+                    "type": "string",
+                    "description": "Area Code",
+                    "x-gitbook-description-html": "<p>Area Code</p>",
+                    "example": ""
+                  },
+                  "key_word": {
+                    "type": "string",
+                    "description": "Keywords (remarks, order number, ip)",
+                    "x-gitbook-description-html": "<p>Keywords (remarks, order number, ip)</p>",
+                    "example": ""
+                  },
+                  "is_auto_renew": {
+                    "type": "integer",
+                    "description": "Whether to automatically renew 1 Yes - 1 No",
+                    "x-gitbook-description-html": "<p>Whether to automatically renew 1 Yes - 1 No</p>",
+                    "example": ""
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": "Output file stream"
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/static/region": {
+      "post": {
+        "summary": "List regions of dedicated datacenter",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Dedicated Datacenter Proxies",
+          "Dedicated Datacenter Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "list": {
+                      "Asia-Pacific": [
+                        {
+                          "node": "Vietnam Ho Chi Minh City\n",
+                          "node_en": "Vietnam Ho Chi Minh City\n",
+                          "param": 0,
+                          "region": "vn-sgn"
+                        }
+                      ],
+                      "Europe and America": [
+                        {
+                          "node": "Washington",
+                          "node_en": "Washington",
+                          "param": 0,
+                          "region": "us-ws"
+                        }
+                      ],
+                      "South Asia": null,
+                      "the Middle East": [
+                        {
+                          "node": "Dubai",
+                          "node_en": "Dubai",
+                          "param": 0,
+                          "region": "ae-dubai"
+                        }
+                      ],
+                      "Africa": [
+                        {
+                          "node": "Angola - Luanda",
+                          "node_en": "Angola - Luanda",
+                          "param": 0,
+                          "region": "ao-luanda"
+                        }
+                      ],
+                      "Oceania": [
+                        {
+                          "node": "Australia Sydney",
+                          "node_en": "Australia Sydney",
+                          "param": 0,
+                          "region": "au-syd"
+                        }
+                      ]
+                    }
+                  },
+                  "msg": "success",
+                  "timestamp": 1732324770
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/static/renew": {
+      "post": {
+        "summary": "Renew ips of dedicated datacenter",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Dedicated Datacenter Proxies",
+          "Dedicated Datacenter Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "renew_ip_list": {
+                    "type": "string",
+                    "description": "Renew IP, multiple use ',' separated",
+                    "x-gitbook-description-html": "<p>Renew IP, multiple use ',' separated</p>",
+                    "example": "127.0.0.1,127.0.0.2"
+                  },
+                  "duration": {
+                    "type": "string",
+                    "description": "IP activation time:week|month",
+                    "x-gitbook-description-html": "<p>IP activation time:week|month</p>",
+                    "example": ""
+                  }
+                },
+                "required": [
+                  "renew_ip_list",
+                  "duration"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": null,
+                  "msg": "success",
+                  "timestamp": 1732186555
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/static/renew_setting": {
+      "post": {
+        "summary": "Update renewal setting",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Proxy/Dedicated Datacenter Proxies",
+          "Dedicated Datacenter Proxies"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "Product type:static",
+                    "x-gitbook-description-html": "<p>Product type:static</p>",
+                    "example": "static"
+                  },
+                  "ids": {
+                    "type": "string",
+                    "description": "Ip's id(multiple use ',' separated)",
+                    "x-gitbook-description-html": "<p>Ip's id(multiple use ',' separated)</p>",
+                    "example": "100,111,112"
+                  },
+                  "package_type": {
+                    "type": "string",
+                    "description": "IP activation time:week|month",
+                    "x-gitbook-description-html": "<p>IP activation time:week|month</p>",
+                    "example": "week"
+                  },
+                  "status": {
+                    "type": "integer",
+                    "description": "Status: -1=disabled, 1=normal",
+                    "x-gitbook-description-html": "<p>Status: -1=disabled, 1=normal</p>",
+                    "example": "1"
+                  },
+                  "renew_type": {
+                    "type": "integer",
+                    "description": "Renewal method: 1 wallet, 2 credit cards",
+                    "example": 1
+                  }
+                },
+                "required": [
+                  "type",
+                  "ids",
+                  "package_type",
+                  "status",
+                  "renew_type"
+                ]
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": null,
+                  "msg": "success",
+                  "timestamp": 1732186555
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/capture/get_balance": {
+      "post": {
+        "summary": "Get the remaining balance",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Scraper/Universal",
+          "爬虫API"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>成功</p>",
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "scraper_balance": 17056
+                  },
+                  "msg": "success",
+                  "timestamp": 1747795328
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>失败</p>",
+            "description": "失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/capture/logs": {
+      "post": {
+        "summary": "Consumption record list",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Scraper/Universal"
+        ],
+        "parameters": [
+          {
+            "name": "start_time",
+            "in": "query",
+            "description": "Start Time",
+            "required": true,
+            "example": "2026-03-26 00:00:00",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "end_time",
+            "in": "query",
+            "description": "End Time",
+            "required": true,
+            "example": "2026-03-26 00:00:00",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "list": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "time_label": {
+                                "type": "string",
+                                "description": "时间"
+                              },
+                              "unlocker_total_cost": {
+                                "type": "integer",
+                                "description": "网页解锁器消耗额度"
+                              },
+                              "scraper_total_cost": {
+                                "type": "integer",
+                                "description": "scraper api消耗额度"
+                              },
+                              "unlocker_used_res": {
+                                "type": "integer",
+                                "description": "网页解锁器消耗次数（次）"
+                              },
+                              "scraper_used_res": {
+                                "type": "integer",
+                                "description": "scraper api消耗次数（次）"
+                              },
+                              "scraper_used_flow": {
+                                "type": "integer",
+                                "description": "scraper api消耗流量（G）"
+                              }
+                            },
+                            "required": [
+                              "time_label",
+                              "unlocker_total_cost",
+                              "scraper_total_cost",
+                              "unlocker_used_res",
+                              "scraper_used_res",
+                              "scraper_used_flow"
+                            ]
+                          }
+                        }
+                      },
+                      "required": [
+                        "list"
+                      ]
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data",
+                    "msg",
+                    "timestamp"
+                  ]
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "list": [
+                      {
+                        "time_label": "2026-03-26",
+                        "unlocker_total_cost": 0,
+                        "scraper_total_cost": 0,
+                        "unlocker_used_res": 0,
+                        "scraper_used_res": 0,
+                        "scraper_used_flow": 0,
+                        "browser_total_cost": 0,
+                        "browser_used_flow": 0
+                      },
+                      {
+                        "time_label": "2026-03-27",
+                        "unlocker_total_cost": 0,
+                        "scraper_total_cost": 0,
+                        "unlocker_used_res": 0,
+                        "scraper_used_res": 0,
+                        "scraper_used_flow": 0,
+                        "browser_total_cost": 0,
+                        "browser_used_flow": 0
+                      }
+                    ]
+                  },
+                  "msg": "success",
+                  "timestamp": 1774937060
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/proxy/unblocker_area": {
+      "post": {
+        "summary": "Get list of countries",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Scraper/Universal",
+          "网页解锁器"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "search_word": {
+                    "type": "string",
+                    "example": ""
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>成功</p>",
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "continent": {
+                      "1": "Asia",
+                      "2": "Europe",
+                      "3": "North America",
+                      "4": "South America",
+                      "5": "Oceania",
+                      "6": "Africa"
+                    },
+                    "country": [
+                      {
+                        "continent": "Asia",
+                        "continent_code": 1,
+                        "list": [
+                          {
+                            "code": "jp",
+                            "continent": 1,
+                            "ip_num": 0,
+                            "name": "Japan",
+                            "name_en": "Japan",
+                            "protocol": 1
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "msg": "success",
+                  "timestamp": 1747641775
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>失败</p>",
+            "description": "失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/proxy/unblocker_area_by_country": {
+      "post": {
+        "summary": "Get list of states",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Scraper/Universal",
+          "网页解锁器"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "description": "country code",
+                    "x-gitbook-description-html": "<p>国家代码</p>",
+                    "example": "us"
+                  }
+                },
+                "required": [
+                  "code"
+                ]
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>成功</p>",
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "data": [
+                      {
+                        "state": "hialeah"
+                      }
+                    ]
+                  },
+                  "msg": "success",
+                  "timestamp": 1747642262
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>失败</p>",
+            "description": "失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/proxy/unblocker_city_by_area": {
+      "post": {
+        "summary": "Get city list",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Scraper/Universal",
+          "网页解锁器"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "description": "country code",
+                    "x-gitbook-description-html": "<p>国家代码</p>",
+                    "example": "us"
+                  },
+                  "region": {
+                    "type": "string",
+                    "description": "State/Province Name",
+                    "x-gitbook-description-html": "<p>州/省名称</p>",
+                    "example": "Firstmesa"
+                  }
+                },
+                "required": [
+                  "code",
+                  "region"
+                ]
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>成功</p>",
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "data": [
+                      {
+                        "code": "guntersville"
+                      }
+                    ]
+                  },
+                  "msg": "success",
+                  "timestamp": 1732188644
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>失败</p>",
+            "description": "失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/proxy/unblocker_city_isp": {
+      "post": {
+        "summary": "Get list of carriers",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Scraper/Universal",
+          "网页解锁器"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "description": "country code",
+                    "x-gitbook-description-html": "<p>国家代码</p>",
+                    "example": "SG"
+                  }
+                },
+                "required": [
+                  "code"
+                ]
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>成功</p>",
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "list": [
+                      {
+                        "asn": "AS327712",
+                        "show_name": "Telecom Algeria"
+                      }
+                    ]
+                  },
+                  "msg": "success",
+                  "timestamp": 1732188842
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>失败</p>",
+            "description": "失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/capture/unit": {
+      "post": {
+        "summary": "Get user capture unit price",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Scraper/Universal"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "scraper": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "package": {
+                                "type": "string"
+                              },
+                              "level": {
+                                "type": "integer",
+                                "description": "等级"
+                              },
+                              "price": {
+                                "type": "number",
+                                "description": "单价"
+                              },
+                              "available": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "package",
+                              "level",
+                              "price",
+                              "available"
+                            ]
+                          },
+                          "description": "scraper api单价"
+                        },
+                        "unblocker": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "package": {
+                                "type": "string"
+                              },
+                              "level": {
+                                "type": "integer",
+                                "description": "等级"
+                              },
+                              "price": {
+                                "type": "number",
+                                "description": "单价"
+                              },
+                              "available": {
+                                "type": "integer"
+                              }
+                            }
+                          },
+                          "description": "网页解锁器"
+                        }
+                      },
+                      "required": [
+                        "scraper",
+                        "unblocker"
+                      ]
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data",
+                    "msg",
+                    "timestamp"
+                  ]
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "scraper": [
+                      {
+                        "package": "scraper",
+                        "level": 1,
+                        "price": 1.6,
+                        "available": 0
+                      },
+                      {
+                        "package": "scraper",
+                        "level": 2,
+                        "price": 0.7,
+                        "available": 0
+                      },
+                      {
+                        "package": "scraper",
+                        "level": 3,
+                        "price": 1.2,
+                        "available": 0
+                      }
+                    ],
+                    "unblocker": [
+                      {
+                        "package": "web_unlocker",
+                        "level": 1,
+                        "price": 1.3,
+                        "available": 0
+                      }
+                    ]
+                  },
+                  "msg": "success",
+                  "timestamp": 1774942516
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/request": {
+      "post": {
+        "summary": "YouTube Video Post — youtube_video-post_explore",
+        "deprecated": false,
+        "description": "Configure YouTube Video Posts scraping parameters with Novada **Scraper API**. Supports batch collection via video URL, search filters, tags, podcast URL, keywords, and explore pages — retrieving video title, view count, likes, comments, channel subscribers, duration, upload date, transcript, and more. Exports in JSON/CSV/XLSX format.\n\n**scraper_params** (JSON array) item schema:\n```json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"url\": {\n      \"type\": \"string\"\n    }\n  },\n  \"example\": {\n    \"url\": \"https://www.youtube.com/watch?v=HAwTwmzgNc4\"\n  }\n}\n```",
+        "operationId": "youtube_video-post_explore",
+        "tags": [
+          "Scraper/Scraper api/YouTube",
+          "YouTube"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "scraper_name": {
+                    "type": "string",
+                    "example": "youtube.com"
+                  },
+                  "scraper_id": {
+                    "type": "string",
+                    "example": "youtube_video-post_explore"
+                  },
+                  "scraper_errors": {
+                    "type": "string",
+                    "example": "true"
+                  },
+                  "scraper_params": {
+                    "type": "string",
+                    "description": "JSON-encoded array of parameters. See schema in description.",
+                    "example": "[{\"url\":\"https://www.youtube.com/watch?v=HAwTwmzgNc4\"}]"
+                  }
+                },
+                "required": [
+                  "scraper_name",
+                  "scraper_id",
+                  "scraper_params"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful scraping response. Returns scraped data in the requested export format (JSON/CSV/XLSX).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v1/browser_flow/browser_flow_use": {
+      "post": {
+        "summary": "List main account traffic consumption",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Scraper/Browser API",
+          "浏览器Api"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "start_time": {
+                    "type": "string",
+                    "description": "Start time",
+                    "x-gitbook-description-html": "<p>开始时间</p>",
+                    "example": "2006-01-02 15:04:05"
+                  },
+                  "end_time": {
+                    "type": "string",
+                    "description": "End time",
+                    "x-gitbook-description-html": "<p>结束时间</p>",
+                    "example": "2006-01-02 15:04:05"
+                  }
+                },
+                "required": [
+                  "start_time",
+                  "end_time"
+                ]
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>成功</p>",
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "list": [
+                      {
+                        "id": 1,
+                        "uid": 81,
+                        "balance": 30999907705,
+                        "all_buy": 31000000000,
+                        "use": 92295,
+                        "day": 1731427200,
+                        "expire_flow": 0
+                      }
+                    ]
+                  },
+                  "msg": "success",
+                  "timestamp": 1732105258
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>失败</p>",
+            "description": "失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/proxy/browser_area": {
+      "post": {
+        "summary": "List proxy countries",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Scraper/Browser API",
+          "Browser Api"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "continent": {
+                      "1": "Asia",
+                      "2": "Europe",
+                      "3": "North America",
+                      "4": "South America",
+                      "5": "Oceania",
+                      "6": "Africa",
+                      "7": "Antarctica"
+                    },
+                    "country": [
+                      {
+                        "continent": "Asia",
+                        "continent_code": 1,
+                        "list": [
+                          {
+                            "code": "kr",
+                            "continent": 1,
+                            "ip_num": 0,
+                            "name": "Korea",
+                            "name_en": "Korea",
+                            "protocol": 1
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "msg": "success",
+                  "timestamp": 1732261110
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/wallet/balance": {
+      "post": {
+        "summary": "Show wallet balance",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Other/Wallet",
+          "Wallet"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "balance": 104
+                  },
+                  "msg": "success",
+                  "timestamp": 1732107363
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/v1/wallet/usage_record": {
+      "post": {
+        "summary": "List usage record",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Other/Wallet",
+          "Wallet"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "page": {
+                    "type": "integer",
+                    "description": "Number of entries per page",
+                    "x-gitbook-description-html": "<p>Number of entries per page</p>",
+                    "example": "1"
+                  },
+                  "limit": {
+                    "type": "integer",
+                    "description": "page number",
+                    "x-gitbook-description-html": "<p>page number</p>",
+                    "example": "10"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "x-gitbook-description-html": "<p>Success</p>",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {},
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "count": 37,
+                    "list": [
+                      {
+                        "created_at": 1732106923,
+                        "updated_at": 1732106923,
+                        "id": 845,
+                        "uid": 81,
+                        "order_type": "static_open",
+                        "type": 1,
+                        "source": 5,
+                        "order_id": "2411202048427491",
+                        "money": 0,
+                        "pay_money": 0,
+                        "pay_type": "Wallet",
+                        "pay_sn": "",
+                        "pay_status": 0,
+                        "pay_cate": 3,
+                        "description": "StaticIp-open-360-1-59ae51e68e0-$0.00",
+                        "status": 1,
+                        "create_admin": "",
+                        "is_first_order": 1,
+                        "pay_time": 0,
+                        "closed_at": 1732108723
+                      }
+                    ]
+                  },
+                  "msg": "success",
+                  "timestamp": 1732107434
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "x-gitbook-description-html": "<p>Fail</p>",
+            "description": "Fail",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "API key passed as: Authorization: Bearer <YOUR_API_KEY>"
+      }
+    }
+  },
+  "servers": [],
+  "security": [
+    {
+      "bearer": []
+    }
+  ]
+}
