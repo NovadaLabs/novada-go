@@ -34,7 +34,7 @@ Base URL（共 **3 个**，由使用方提供并确认）：
 
 | 项 | 值 |
 |----|----|
-| 模块路径 | `github.com/novada/novada-go`（确认仓库）|
+| 模块路径 | `github.com/NovadaLabs/novada-go`（确认仓库）|
 | 包结构 | 分子包：`proxy`、`scraper`、`wallet`；顶层 `novada` 提供 client/config/errors/transport |
 | 最低 Go 版本 | 1.21 |
 | License | MIT |

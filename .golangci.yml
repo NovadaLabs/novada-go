@@ -1,0 +1,22 @@
+run:
+  timeout: 5m
+
+linters:
+  enable:
+    - gofmt
+    - govet
+    - ineffassign
+    - misspell
+    - staticcheck
+    - unconvert
+    - unused
+
+issues:
+  exclude-rules:
+    # Example commands and tests may ignore some return values for brevity.
+    - path: examples/
+      linters:
+        - errcheck
+    - path: _test\.go
+      linters:
+        - errcheck
