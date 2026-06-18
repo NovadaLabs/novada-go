@@ -1,0 +1,226 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "默认模块",
+    "description": "OpenAPI specification generated from Novada Scraper API documentation.\n\nAll scraping operations are submitted as `POST` requests to the same endpoint `https://webunlocker.novada.com/request` using `application/x-www-form-urlencoded` bodies. Each distinct scraping operation is identified by its `scraper_id` value. Because every operation targets the same real path, operations are listed under pseudo-paths of the form `/request#<scraper_id>`; the real request path is always `/request` (see the `x-actual-path` field on each path).\n\nAuthentication uses a Bearer API key in the `Authorization` header.",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Scraper"
+    },
+    {
+      "name": "Scraper/Web Unblocker"
+    }
+  ],
+  "paths": {
+    "/request": {
+      "post": {
+        "summary": "Web Unblocker request",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Scraper/Web Unblocker"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "target_url": {
+                    "description": "destination address",
+                    "example": "https://www.google.com",
+                    "type": "string"
+                  },
+                  "response_format": {
+                    "description": "The output format of the crawled results only supports HTML and PNG, separated by English commas.",
+                    "example": "html",
+                    "type": "string"
+                  },
+                  "js_render": {
+                    "type": "boolean",
+                    "description": "JS rendering: true for enabled, false for disabled. Enabling is recommended to capture dynamically rendered, asynchronously loaded, and complex interactive content.",
+                    "example": "true"
+                  },
+                  "headers": {
+                    "description": "Custom headers are used to access the website.",
+                    "example": "",
+                    "type": "string"
+                  },
+                  "cookies": {
+                    "description": "Custom cookies are used to access the website.",
+                    "example": "",
+                    "type": "string"
+                  },
+                  "country": {
+                    "description": "Proxy countries/regions during crawling",
+                    "example": "us",
+                    "type": "string"
+                  },
+                  "wait_ms": {
+                    "type": "integer",
+                    "description": "Maximum page wait time (milliseconds), maximum value 100000 milliseconds",
+                    "example": 5000
+                  },
+                  "wait_selector": {
+                    "description": "Wait for the CSS selector to load in the DOM. If both `wait_selector` and `wait_ms` are used, `wait_selector` takes precedence (overriding the fixed time). Specifies the element to wait for a maximum of 30 seconds, after which the website content will automatically return.",
+                    "example": "",
+                    "type": "string"
+                  },
+                  "follow_redirects": {
+                    "description": "When a user accesses an expired URL, they are redirected to the new URL.",
+                    "example": "",
+                    "type": "string"
+                  },
+                  "block_resources": {
+                    "description": "Should we prevent the loading of unnecessary resources such as images, JC files, and videos to improve crawling speed?",
+                    "example": "",
+                    "type": "string"
+                  },
+                  "clear": {
+                    "description": "Clean up unnecessary JS and CSS content in the crawl results.",
+                    "example": "",
+                    "type": "string"
+                  },
+                  "auto_runs": {
+                    "type": "integer",
+                    "description": "Errors caused by proxy failures can be automatically retried by setting the number of retries. The maximum number of retries is 10, and the default is 2.",
+                    "example": 0
+                  }
+                },
+                "required": [
+                  "target_url",
+                  "response_format"
+                ]
+              },
+              "example": {
+                "target_url": "https://www.google.com",
+                "response_format": "html",
+                "js_render": "true",
+                "headers": "",
+                "cookies": "",
+                "country": "us",
+                "wait_ms": 5000,
+                "wait_selector": "",
+                "follow_redirects": "",
+                "block_resources": "",
+                "clear": "",
+                "auto_runs": 0
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "integer"
+                        },
+                        "html": {
+                          "type": "string"
+                        },
+                        "msg": {
+                          "type": "string"
+                        },
+                        "msg_detail": {
+                          "type": "string"
+                        },
+                        "use_balance": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "code",
+                        "html",
+                        "msg",
+                        "msg_detail",
+                        "use_balance"
+                      ]
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data",
+                    "msg",
+                    "timestamp"
+                  ]
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "code": 200,
+                    "html": "<!DOCTYPE html><html itemscope=\"\" itemtype=\"http://schema.org/WebPage\" lang=\"en\"></html>",
+                    "msg": "",
+                    "msg_detail": "",
+                    "use_balance": 0.0013
+                  },
+                  "msg": "Success",
+                  "timestamp": 1781678047
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://webunlocker.novada.com",
+      "description": "网页解锁器"
+    }
+  ],
+  "security": [
+    {
+      "bearer": []
+    }
+  ]
+}

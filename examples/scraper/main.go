@@ -42,6 +42,17 @@ func main() {
 	}
 	fmt.Println(res.Raw)
 
+	// Web Unblocker — strongly typed scrape (routes to the Web Unblocker host).
+	unb, err := client.Scraper.Unblocker.Scrape(ctx, scraper.UnblockerParams{
+		TargetURL: "https://www.google.com",
+		Country:   "us",
+	})
+	if err != nil {
+		log.Fatalf("unblocker: %v", err)
+	}
+	fmt.Printf("unblocker code=%d html=%d bytes use_balance=%v\n",
+		unb.Code, len(unb.HTML), unb.UseBalance)
+
 	// Query endpoints on the general host.
 	bal, err := client.Scraper.Universal.Balance(ctx)
 	if err != nil {

@@ -82,7 +82,7 @@ func New(d transport.Doer) *Service {
 	s := &Service{d: d}
 	s.API = &APIService{svc: s}
 	s.API.YouTube = &YouTubeService{svc: s}
-	s.Unblocker = &UnblockerService{d: d, svc: s}
+	s.Unblocker = &UnblockerService{d: d}
 	s.Universal = &UniversalService{d: d}
 	s.Browser = &BrowserService{d: d}
 	return s

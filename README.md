@@ -47,7 +47,7 @@ Novada serves requests from **three** hosts. All are configurable and default to
 | Purpose       | Default                          | Used by |
 |---------------|----------------------------------|---------|
 | General       | `https://api-m.novada.com`       | Every `/v1/*` endpoint (proxy, wallet, and the scraper area/balance/unit queries) |
-| Web Unblocker | `https://webunlocker.novada.com` | `Scraper.Do` / `Scraper.Unblocker.Scrape` with `Target = TargetWebUnblocker` |
+| Web Unblocker | `https://webunlocker.novada.com` | `Scraper.Unblocker.Scrape` (typed), or `Scraper.Do` with `Target = TargetWebUnblocker` |
 | Scraper API   | `https://scraper.novada.com`     | `Scraper.Do` / `Scraper.API.*` with `Target = TargetScraperAPI` |
 
 Only the scrape `POST /request` calls go to the Web Unblocker / Scraper API hosts; everything else (`/v1/*`) uses the general host.
@@ -111,6 +111,13 @@ res, err = client.Scraper.Do(ctx, scraper.Request{
 })
 fmt.Println(res.Raw) // raw scrape result (JSON/CSV/XLSX, depending on scraper)
 
+// Web Unblocker — typed scrape; returns a structured result, not raw text
+unb, err := client.Scraper.Unblocker.Scrape(ctx, scraper.UnblockerParams{
+	TargetURL: "https://www.google.com", // required
+	Country:   "us",                     // ResponseFormat defaults to "html"
+})
+fmt.Println(unb.Code, len(unb.HTML), unb.UseBalance)
+
 // Query endpoints on the general host
 client.Scraper.Universal.Balance(ctx)   // /v1/capture/get_balance
 client.Scraper.Universal.Unit(ctx)      // /v1/capture/unit
@@ -118,7 +125,7 @@ client.Scraper.Unblocker.Countries(ctx) // /v1/proxy/unblocker_area
 client.Scraper.Browser.Countries(ctx)   // /v1/proxy/browser_area
 ```
 
-`Scraper.Do` marshals `Params` to JSON, places it in the `scraper_params` form field, URL-encodes the body, and routes to the host selected by `Target`. Scrape responses are returned raw because their format varies by scraper.
+`Scraper.Do` marshals `Params` to JSON, places it in the `scraper_params` form field, URL-encodes the body, and routes to the host selected by `Target`. Scrape responses are returned raw because their format varies by scraper. `Scraper.Unblocker.Scrape` is the dedicated Web Unblocker call: it sends the endpoint's own fields (`target_url`, `response_format`, `js_render`, `country`, `wait_ms`, …) and decodes the JSON envelope into `*scraper.UnblockerResult` (`HTML`, `Code`, `Msg`, `MsgDetail`, `UseBalance`).
 
 ## Wallet
 

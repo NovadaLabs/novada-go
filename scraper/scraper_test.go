@@ -19,6 +19,11 @@ type fakeDoer struct {
 	rawValues url.Values
 	rawResp   []byte
 	err       error
+
+	feHost   string
+	fePath   string
+	feValues url.Values
+	feResp   string
 }
 
 func (f *fakeDoer) DoMultipart(_ context.Context, _, path string, fields map[string]string, out any) error {
@@ -39,7 +44,16 @@ func (f *fakeDoer) DoMultipartRaw(_ context.Context, _, path string, fields map[
 	return f.rawResp, f.err
 }
 
-func (f *fakeDoer) DoFormURLEncoded(_ context.Context, _, _ string, _ url.Values, _ any) error {
+func (f *fakeDoer) DoFormURLEncoded(_ context.Context, host, path string, values url.Values, out any) error {
+	f.feHost = host
+	f.fePath = path
+	f.feValues = values
+	if f.err != nil {
+		return f.err
+	}
+	if out != nil && f.feResp != "" {
+		return json.Unmarshal([]byte(f.feResp), out)
+	}
 	return nil
 }
 
@@ -240,14 +254,37 @@ func TestUnblocker_Validation(t *testing.T) {
 }
 
 func TestUnblocker_Scrape(t *testing.T) {
-	d := &fakeDoer{rawResp: []byte("unblocked")}
-	res, err := New(d).Unblocker.Scrape(ctx(), "example.com", "web-unlocker",
-		[]map[string]any{{"url": "https://example.com"}})
+	d := &fakeDoer{feResp: `{"code":200,"html":"<html></html>","msg_detail":"","use_balance":0.0013}`}
+	js := true
+	res, err := New(d).Unblocker.Scrape(ctx(), UnblockerParams{
+		TargetURL: "https://www.google.com",
+		Country:   "us",
+		JSRender:  &js,
+		WaitMS:    5000,
+	})
 	if err != nil {
 		t.Fatalf("Scrape: %v", err)
 	}
-	if d.rawHost != "http://unblock.test" || res.Raw != "unblocked" {
-		t.Errorf("host=%q raw=%q", d.rawHost, res.Raw)
+	if d.feHost != "http://unblock.test" || d.fePath != "/request" {
+		t.Errorf("routed to host=%q path=%q", d.feHost, d.fePath)
+	}
+	if d.feValues.Get("target_url") != "https://www.google.com" ||
+		d.feValues.Get("response_format") != "html" || // defaulted
+		d.feValues.Get("js_render") != "true" ||
+		d.feValues.Get("country") != "us" ||
+		d.feValues.Get("wait_ms") != "5000" {
+		t.Errorf("values = %v", d.feValues)
+	}
+	if res.Code != 200 || res.HTML != "<html></html>" || res.UseBalance != 0.0013 {
+		t.Errorf("result = %+v", res)
+	}
+}
+
+func TestUnblocker_ScrapeValidation(t *testing.T) {
+	_, err := New(&fakeDoer{}).Unblocker.Scrape(ctx(), UnblockerParams{})
+	var ve *ValidationError
+	if !errors.As(err, &ve) || len(ve.Fields) != 1 || ve.Fields[0] != "target_url" {
+		t.Errorf("validation = %v", err)
 	}
 }
 

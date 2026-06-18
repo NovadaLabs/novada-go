@@ -3,6 +3,8 @@ package scraper
 import (
 	"context"
 	"encoding/json"
+	"net/url"
+	"strconv"
 	"strings"
 
 	"github.com/NovadaLabs/novada-go/internal/transport"
@@ -143,19 +145,109 @@ type ISPList struct {
 // area queries are /v1/* APIs on the general host; the scrape itself uses
 // Scrape (which routes to the Web Unblocker host).
 type UnblockerService struct {
-	d   transport.Doer
-	svc *Service
+	d transport.Doer
 }
 
-// Scrape submits a Web Unblocker scrape job (Target = TargetWebUnblocker).
-// scraperName, scraperID and at least one params item are required.
-func (s *UnblockerService) Scrape(ctx context.Context, scraperName, scraperID string, params []map[string]any) (*Response, error) {
-	return s.svc.Do(ctx, Request{
-		Target:      TargetWebUnblocker,
-		ScraperName: scraperName,
-		ScraperID:   scraperID,
-		Params:      params,
-	})
+// UnblockerParams configures a Web Unblocker scrape (POST /request). Only
+// TargetURL is required; ResponseFormat defaults to "html" when empty, and the
+// remaining optional fields are sent only when set.
+type UnblockerParams struct {
+	// TargetURL is the destination address to scrape. Required.
+	TargetURL string
+	// ResponseFormat is the output format: "html", "png" or "html,png"
+	// (comma-separated). Defaults to "html" when empty.
+	ResponseFormat string
+	// JSRender enables JS rendering to capture dynamically loaded content.
+	JSRender *bool
+	// Headers are custom request headers used to access the site.
+	Headers string
+	// Cookies are custom cookies used to access the site.
+	Cookies string
+	// Country is the proxy country/region, e.g. "us".
+	Country string
+	// WaitMS is the maximum page wait time in milliseconds (max 100000). Sent
+	// only when positive.
+	WaitMS int
+	// WaitSelector waits for a CSS selector to appear in the DOM (max 30s). It
+	// takes precedence over WaitMS when both are set.
+	WaitSelector string
+	// FollowRedirects follows redirects from expired URLs to their new target.
+	FollowRedirects *bool
+	// BlockResources skips loading images, JS files and videos to speed up the
+	// crawl.
+	BlockResources *bool
+	// Clear strips unnecessary JS and CSS from the crawl result.
+	Clear *bool
+	// AutoRuns is the number of automatic retries on proxy failure (0-10,
+	// server default 2). Sent only when non-nil.
+	AutoRuns *int
+}
+
+// UnblockerResult is the decoded data payload of a Web Unblocker scrape.
+type UnblockerResult struct {
+	// Code is the page-level status (200 on success).
+	Code int `json:"code"`
+	// HTML is the scraped content.
+	HTML string `json:"html"`
+	// Msg is a short status message.
+	Msg string `json:"msg"`
+	// MsgDetail carries additional error detail when the scrape fails.
+	MsgDetail string `json:"msg_detail"`
+	// UseBalance is the balance consumed by this call.
+	UseBalance float64 `json:"use_balance"`
+}
+
+// Scrape submits a Web Unblocker scrape job (POST /request on the Web Unblocker
+// host) and decodes the structured result. TargetURL is required.
+func (s *UnblockerService) Scrape(ctx context.Context, p UnblockerParams) (*UnblockerResult, error) {
+	if err := requireField("target_url", p.TargetURL); err != nil {
+		return nil, err
+	}
+
+	format := strings.TrimSpace(p.ResponseFormat)
+	if format == "" {
+		format = "html"
+	}
+
+	values := url.Values{}
+	values.Set("target_url", p.TargetURL)
+	values.Set("response_format", format)
+	if p.JSRender != nil {
+		values.Set("js_render", strconv.FormatBool(*p.JSRender))
+	}
+	if p.Headers != "" {
+		values.Set("headers", p.Headers)
+	}
+	if p.Cookies != "" {
+		values.Set("cookies", p.Cookies)
+	}
+	if p.Country != "" {
+		values.Set("country", p.Country)
+	}
+	if p.WaitMS > 0 {
+		values.Set("wait_ms", strconv.Itoa(p.WaitMS))
+	}
+	if p.WaitSelector != "" {
+		values.Set("wait_selector", p.WaitSelector)
+	}
+	if p.FollowRedirects != nil {
+		values.Set("follow_redirects", strconv.FormatBool(*p.FollowRedirects))
+	}
+	if p.BlockResources != nil {
+		values.Set("block_resources", strconv.FormatBool(*p.BlockResources))
+	}
+	if p.Clear != nil {
+		values.Set("clear", strconv.FormatBool(*p.Clear))
+	}
+	if p.AutoRuns != nil {
+		values.Set("auto_runs", strconv.Itoa(*p.AutoRuns))
+	}
+
+	var out UnblockerResult
+	if err := s.d.DoFormURLEncoded(ctx, s.d.WebUnblockerURL(), "/request", values, &out); err != nil {
+		return nil, err
+	}
+	return &out, nil
 }
 
 // Countries lists Web Unblocker countries (POST /v1/proxy/unblocker_area).
