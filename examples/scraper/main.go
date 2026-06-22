@@ -18,17 +18,8 @@ func main() {
 
 	ctx := context.Background()
 
-	// Strongly typed YouTube scraper (routes to the Scraper API host).
-	res, err := client.Scraper.API.YouTube.VideoPost(ctx, scraper.YouTubeVideoParams{
-		URL: "https://www.youtube.com/watch?v=HAwTwmzgNc4",
-	})
-	if err != nil {
-		log.Fatalf("youtube: %v", err)
-	}
-	fmt.Println(res.Raw)
-
 	// Generic driver — works for any scraper_id, on either host.
-	res, err = client.Scraper.Do(ctx, scraper.Request{
+	res, err := client.Scraper.Do(ctx, scraper.Request{
 		Target:      scraper.TargetScraperAPI,
 		ScraperName: "youtube.com",
 		ScraperID:   "youtube_video-post_explore",
@@ -39,6 +30,15 @@ func main() {
 	})
 	if err != nil {
 		log.Fatalf("scrape: %v", err)
+	}
+	fmt.Println(res.Raw)
+
+	// Strongly typed YouTube scraper (routes to the Scraper API host).
+	res, err = client.Scraper.API.YouTube.VideoPost(ctx, scraper.YouTubeVideoParams{
+		URL: "https://www.youtube.com/watch?v=HAwTwmzgNc4",
+	})
+	if err != nil {
+		log.Fatalf("youtube: %v", err)
 	}
 	fmt.Println(res.Raw)
 
