@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "默认模块",
+    "title": "default",
     "description": "OpenAPI specification generated from Novada Scraper API documentation.\n\nAll scraping operations are submitted as `POST` requests to the same endpoint `https://scraper.novada.com/request` using `application/x-www-form-urlencoded` bodies. Each distinct scraping operation is identified by its `scraper_id` value. Because every operation targets the same real path, operations are listed under pseudo-paths of the form `/request#<scraper_id>`; the real request path is always `/request` (see the `x-actual-path` field on each path).\n\nAuthentication uses a Bearer API key in the `Authorization` header.",
     "version": "1.0.0"
   },
