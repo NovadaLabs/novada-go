@@ -178,6 +178,39 @@ func TestYouTubeVideoPost(t *testing.T) {
 	}
 }
 
+func TestGoogle_Search(t *testing.T) {
+	d := &fakeDoer{feResp: `{"code":200,"cost_time":1103,"msg":"success","data":{"filename":"","html":null,"json":[{"spider_code":200}],"task_id":"abc123"}}`}
+	res, err := New(d).API.Google.Search(ctx(), GoogleSearchParams{
+		Query:   "apple",
+		Country: "us",
+		Device:  "desktop",
+	})
+	if err != nil {
+		t.Fatalf("Search: %v", err)
+	}
+	if d.feHost != "http://scraper.test" || d.fePath != "/request" {
+		t.Errorf("routed to host=%q path=%q", d.feHost, d.fePath)
+	}
+	if d.feValues.Get("scraper_id") != "google_search" ||
+		d.feValues.Get("q") != "apple" ||
+		d.feValues.Get("json") != "1" || // defaulted to JSON output
+		d.feValues.Get("country") != "us" ||
+		d.feValues.Get("device") != "desktop" {
+		t.Errorf("values = %v", d.feValues)
+	}
+	if res.Code != 200 || res.CostTime != 1103 || res.Data.TaskID != "abc123" {
+		t.Errorf("result = %+v", res)
+	}
+}
+
+func TestGoogle_SearchValidation(t *testing.T) {
+	_, err := New(&fakeDoer{}).API.Google.Search(ctx(), GoogleSearchParams{})
+	var ve *ValidationError
+	if !errors.As(err, &ve) || len(ve.Fields) != 1 || ve.Fields[0] != "q" {
+		t.Errorf("validation = %v", err)
+	}
+}
+
 func TestUniversal_Balance(t *testing.T) {
 	d := &fakeDoer{mpResp: `{"scraper_balance":17056}`}
 	res, err := New(d).Universal.Balance(ctx())

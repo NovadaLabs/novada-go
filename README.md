@@ -101,6 +101,12 @@ res, err := client.Scraper.API.YouTube.VideoPost(ctx, scraper.YouTubeVideoParams
 	URL: "https://www.youtube.com/watch?v=HAwTwmzgNc4",
 })
 
+// Google Search (SerpApi) — typed params, structured result (Data.JSON is the raw result array)
+gs, err := client.Scraper.API.Google.Search(ctx, scraper.GoogleSearchParams{
+	Query: "apple", Country: "us", // Device, HL, RenderJS, AIOverview, … optional
+})
+fmt.Println(gs.Code, gs.CostTime, len(gs.Data.JSON))
+
 // Generic driver — any scraper_id, choose the host explicitly
 res, err = client.Scraper.Do(ctx, scraper.Request{
 	Target:      scraper.TargetScraperAPI, // or scraper.TargetWebUnblocker

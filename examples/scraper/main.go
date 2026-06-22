@@ -42,6 +42,17 @@ func main() {
 	}
 	fmt.Println(res.Raw)
 
+	// Strongly typed Google Search scraper (SerpApi; routes to the Scraper API host).
+	gs, err := client.Scraper.API.Google.Search(ctx, scraper.GoogleSearchParams{
+		Query:   "apple",
+		Country: "us",
+	})
+	if err != nil {
+		log.Fatalf("google search: %v", err)
+	}
+	fmt.Printf("google code=%d cost=%dms results=%d bytes\n",
+		gs.Code, gs.CostTime, len(gs.Data.JSON))
+
 	// Web Unblocker — strongly typed scrape (routes to the Web Unblocker host).
 	unb, err := client.Scraper.Unblocker.Scrape(ctx, scraper.UnblockerParams{
 		TargetURL: "https://www.google.com",
