@@ -69,5 +69,5 @@ func main() {
 	if err != nil {
 		log.Fatalf("balance: %v", err)
 	}
-	fmt.Printf("scraper balance=%d\n", bal.ScraperBalance)
+	fmt.Printf("scraper balance=%f\n", bal.ScraperBalance)
 }

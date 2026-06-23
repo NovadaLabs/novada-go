@@ -212,12 +212,12 @@ func TestGoogle_SearchValidation(t *testing.T) {
 }
 
 func TestUniversal_Balance(t *testing.T) {
-	d := &fakeDoer{mpResp: `{"scraper_balance":17056}`}
+	d := &fakeDoer{mpResp: `998909.179853`}
 	res, err := New(d).Universal.Balance(ctx())
 	if err != nil {
 		t.Fatalf("Balance: %v", err)
 	}
-	if d.mpPath != "/v1/capture/get_balance" || res.ScraperBalance != 17056 {
+	if d.mpPath != "/v1/capture/get_balance" || res.ScraperBalance != 998909.179853 {
 		t.Errorf("path=%q res=%+v", d.mpPath, res)
 	}
 }

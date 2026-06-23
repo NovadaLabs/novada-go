@@ -20,7 +20,7 @@ type UniversalService struct {
 
 // ScraperBalance is the remaining scraper balance.
 type ScraperBalance struct {
-	ScraperBalance int64 `json:"scraper_balance"`
+	ScraperBalance float64 `json:"scraper_balance"`
 }
 
 // UsageLog is a single daily scraper/unblocker/browser consumption record.
@@ -55,13 +55,14 @@ type UnitPrices struct {
 }
 
 // Balance returns the remaining scraper balance
-// (POST /v1/capture/get_balance).
+// (POST /v1/capture/get_balance). The endpoint returns the balance as a bare
+// number in the "data" field, so we decode into an int64 and wrap it.
 func (s *UniversalService) Balance(ctx context.Context) (*ScraperBalance, error) {
-	var out ScraperBalance
-	if err := s.d.DoMultipart(ctx, s.d.BaseURL(), "/v1/capture/get_balance", map[string]string{}, &out); err != nil {
+	var bal float64
+	if err := s.d.DoMultipart(ctx, s.d.BaseURL(), "/v1/capture/get_balance", map[string]string{}, &bal); err != nil {
 		return nil, err
 	}
-	return &out, nil
+	return &ScraperBalance{ScraperBalance: bal}, nil
 }
 
 // Logs returns the scraper consumption records (POST /v1/capture/logs).
